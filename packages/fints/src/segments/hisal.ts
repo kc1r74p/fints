@@ -7,9 +7,6 @@ export class HISALProps {
     public account: SEPAAccount;
     public productName: string;
     public currency: string;
-    public bookedBalance: number;
-    public pendingBalance: number;
-    public creditLimit: number;
     public availableBalance: number;
 }
 
@@ -24,20 +21,14 @@ export class HISAL extends SegmentClass(HISALProps) {
 
     protected deserialize(input: string[][]) {
         const [
-            [ accountNumber, subAccount, _country, blz ],
-            [ productName ],
-            [ currency ],
-            [ _cb, booked ],
-            [ _cp, pending ],
-            [ dispo ],
-            [ available ],
+            [ iban, bic, accountNumber, subAccount, _country, blz ], 
+            [ productName ], 
+            [ _currency ],
+            [ _flag, balance, currency, date ]
         ] = input;
-        this.account = { accountNumber, subAccount, blz, iban: null, bic: null };
+        this.account = { accountNumber, subAccount, blz, iban, bic };
         this.productName = productName;
         this.currency = currency;
-        this.bookedBalance = Parse.num(booked);
-        this.pendingBalance = Parse.num(pending);
-        this.creditLimit = Parse.num(dispo);
-        this.availableBalance = Parse.num(available);
+        this.availableBalance = _flag === 'C' ? Parse.num(balance) : -Parse.num(balance);
     }
 }

@@ -270,18 +270,6 @@ export interface Balance {
      */
     currency: string;
     /**
-     * Balance which is already booked of this account.
-     */
-    bookedBalance: number;
-    /**
-     * Balance of pending transactions of this account.
-     */
-    pendingBalance: number;
-    /**
-     * Available credit limit of this account.
-     */
-    creditLimit: number;
-    /**
      * Balance which is accessible for this account.
      */
     availableBalance: number;

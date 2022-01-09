@@ -91,10 +91,7 @@ export abstract class Client {
         return {
             account,
             availableBalance: hisal.availableBalance,
-            bookedBalance: hisal.bookedBalance,
             currency: hisal.currency,
-            creditLimit: hisal.creditLimit,
-            pendingBalance: hisal.pendingBalance,
             productName: hisal.productName,
         };
     }
